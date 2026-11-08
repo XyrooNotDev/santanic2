@@ -1,29 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical" android:padding="24dp"
-    android:gravity="center" android:background="#121212">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:fillViewport="true">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="SANTANIC\nBUILD" android:textColor="#FF0000" android:textSize="32sp"
-        android:textStyle="bold" android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="Build APK Android dengan GitHub Actions"
-        android:textColor="#AAAAAA" android:layout_marginTop="8dp"/>
+        <!-- Logo Santanic (Pastikan gambar ada di res/drawable) -->
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/logo_santanic" /> <!-- Ganti jika nama file beda -->
 
-    <Button android:id="@+id/btnLoginGithub"
-        android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="Login dengan GitHub"
-        android:backgroundTint="#333333" android:textColor="#FFFFFF"
-        android:layout_marginTop="48dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SANTANIC"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
 
-    <TextView android:id="@+id/tvDeviceCode"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:textColor="#FF0000" android:textSize="18sp" android:textStyle="bold"
-        android:layout_marginTop="24dp" android:gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BUILD"
+            android:textColor="#FF0000"
+            android:textSize="32sp"
+            android:textStyle="bold"/>
 
-    <TextView android:id="@+id/tvStatus"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:textColor="#FFFFFF" android:layout_marginTop="16dp" android:gravity="center"/>
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Build APK Android dengan GitHub Actions"
+            android:textColor="#AAAAAA"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Kotak Login -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1E1E"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login GitHub"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"/>
+                
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Masuk dengan Personal Access Token (PAT)"
+                android:textColor="#AAAAAA"
+                android:textSize="12sp"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Input Token (jika mau manual) -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Token GitHub"
+                android:textColorHint="#888888">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Tombol Login (Tetap pakai fitur Device Flow kita) -->
+            <Button
+                android:id="@+id/btnLoginGithub"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#FF0000"
+                android:text="Login"
+                android:textColor="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="atau"
+                android:textColor="#AAAAAA"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Teks kode device flow -->
+            <TextView
+                android:id="@+id/tvDeviceCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF0000"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Session akan disimpan untuk penggunaan berikutnya"
+            android:textColor="#00FF00"
+            android:textSize="12sp"
+            android:layout_marginTop="24dp"/>
+
+    </LinearLayout>
+</ScrollView>
