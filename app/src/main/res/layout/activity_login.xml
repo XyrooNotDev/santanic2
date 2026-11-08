@@ -17,7 +17,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="40dp"
-            android:src="@drawable/logo_santanic" /> <!-- Ganti jika nama file beda -->
+            android:src="@drawable/ic_santanic" /> <!-- Ganti jika nama file beda -->
 
         <TextView
             android:layout_width="wrap_content"
