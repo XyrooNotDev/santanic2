@@ -7,6 +7,7 @@ import java.io.IOException;
 import okhttp3.*;
 
 public class GitHubAuthManager {
+    // GANTI DENGAN CLIENT ID DARI GITHUB OAUTH APPS ANDA
     private static final String CLIENT_ID = "Ov23liJRu7F3iYnIevNi"; 
     private final OkHttpClient client = new OkHttpClient();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
@@ -48,8 +49,10 @@ public class GitHubAuthManager {
     }
 
     private void startPolling(String deviceCode, int interval, AuthCallback callback) {
-        // Perbaikan: Menggunakan Runnable secara eksplisit agar tidak error
-        Runnable pollRunnable = new Runnable() {
+        // Perbaikan 1: Gunakan array final agar bisa di-referensikan di dalam dirinya sendiri
+        final Runnable[] pollRunnable = new Runnable[1];
+        
+        pollRunnable[0] = new Runnable() {
             @Override public void run() {
                 RequestBody body = new FormBody.Builder()
                         .add("client_id", CLIENT_ID)
@@ -68,19 +71,24 @@ public class GitHubAuthManager {
                         try {
                             JSONObject json = new JSONObject(response.body().string());
                             if (json.has("access_token")) {
-                                mainHandler.post(() -> callback.onLoginSuccess(json.getString("access_token")));
+                                // Perbaikan 2: Ambil string ke variabel dulu sebelum masuk ke lambda
+                                String token = json.getString("access_token");
+                                mainHandler.post(() -> callback.onLoginSuccess(token));
                             } else if (json.optString("error").equals("authorization_pending")) {
-                                // Perbaikan: Gunakan pollRunnable, bukan 'this'
-                                mainHandler.postDelayed(pollRunnable, interval * 1000L);
+                                // Ulangi polling
+                                mainHandler.postDelayed(pollRunnable[0], interval * 1000L);
                             } else {
-                                mainHandler.post(() -> callback.onError("Gagal: " + json.optString("error")));
+                                String err = json.optString("error");
+                                mainHandler.post(() -> callback.onError("Gagal: " + err));
                             }
-                        } catch (Exception e) { }
+                        } catch (Exception e) { 
+                            // Abaikan error parsing kecil
+                        }
                     }
                 });
             }
         };
-        mainHandler.postDelayed(pollRunnable, interval * 1000L);
+        mainHandler.postDelayed(pollRunnable[0], interval * 1000L);
     }
     
     public void getUsername(String token, OnUsernameFetched listener) {
@@ -99,4 +107,4 @@ public class GitHubAuthManager {
         });
     }
     public interface OnUsernameFetched { void onFetched(String username); }
-}
+            }
