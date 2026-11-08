@@ -1,57 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#121212">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="vertical" android:padding="16dp">
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Selamat Datang!" android:textColor="#FFFFFF" android:textSize="24sp" android:textStyle="bold"/>
-        <TextView android:id="@+id/tvUsername" android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="GitHub Connected" android:textColor="#00FF00" android:layout_marginTop="4dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Pilih Jenis Build" android:textColor="#FFFFFF" android:textSize="18sp"
-            android:textStyle="bold" android:layout_marginTop="24dp"/>
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp">
+            
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Santanic Build"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+                
+            <TextView
+                android:text="Connected"
+                android:textColor="#00FF00"
+                android:textSize="12sp"/>
+        </LinearLayout>
 
-        <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:columnCount="2" android:layout_marginTop="16dp">
+        <!-- Profile Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1E1E"
+            android:padding="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp">
 
-            <com.google.android.material.card.MaterialCardView android:id="@+id/cardAndroid"
-                android:layout_width="0dp" android:layout_height="120dp" android:layout_columnWeight="1"
-                android:layout_margin="8dp" android:backgroundTint="#1E1E1E" app:cardCornerRadius="12dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Android Studio\nBuild APK" android:textColor="#FFFFFF"
-                    android:layout_gravity="center" android:gravity="center"/>
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_myplaces" /> <!-- Ganti dengan ikon profil -->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selamat Datang!"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GitHub Connected"
+                    android:textColor="#00FF00"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Pilih Jenis Build -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilih Jenis Build"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:layout_marginTop="8dp">
+
+            <!-- Kotak Android -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAndroid"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Android Studio\nBuild APK"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView android:id="@+id/cardFlutter"
-                android:layout_width="0dp" android:layout_height="120dp" android:layout_columnWeight="1"
-                android:layout_margin="8dp" android:backgroundTint="#1E1E1E" app:cardCornerRadius="12dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Flutter\nBuild APK" android:textColor="#FFFFFF"
-                    android:layout_gravity="center" android:gravity="center"/>
+            <!-- Kotak Flutter -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardFlutter"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Flutter\nBuild APK"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView android:id="@+id/cardWeb"
-                android:layout_width="0dp" android:layout_height="120dp" android:layout_columnWeight="1"
-                android:layout_margin="8dp" android:backgroundTint="#1E1E1E" app:cardCornerRadius="12dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="WebToAPK\nBuild APK" android:textColor="#FFFFFF"
-                    android:layout_gravity="center" android:gravity="center"/>
+            <!-- Kotak Web -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardWeb"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WebToAPK\nBuild APK"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView android:id="@+id/cardHistory"
-                android:layout_width="0dp" android:layout_height="120dp" android:layout_columnWeight="1"
-                android:layout_margin="8dp" android:backgroundTint="#1E1E1E" app:cardCornerRadius="12dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Riwayat\nBuild" android:textColor="#FFFFFF"
-                    android:layout_gravity="center" android:gravity="center"/>
+            <!-- Kotak Upload ZIP -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardHistory"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload Project\nZIP / yml"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
             </com.google.android.material.card.MaterialCardView>
+
         </GridLayout>
     </LinearLayout>
 </ScrollView>
