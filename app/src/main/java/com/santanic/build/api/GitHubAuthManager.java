@@ -7,8 +7,9 @@ import java.io.IOException;
 import okhttp3.*;
 
 public class GitHubAuthManager {
-    // GANTI DENGAN CLIENT ID DARI GITHUB OAUTH APPS ANDA
+    // CLIENT_ID Anda sudah terisi dengan benar
     private static final String CLIENT_ID = "Ov23liJRu7F3iYnIevNi"; 
+    
     private final OkHttpClient client = new OkHttpClient();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
@@ -18,6 +19,9 @@ public class GitHubAuthManager {
         void onError(String error);
     }
 
+    // ==========================================
+    // METODE 1: LOGIN DENGAN KODE 6 DIGIT (Device Flow)
+    // ==========================================
     public void requestDeviceCode(AuthCallback callback) {
         RequestBody body = new FormBody.Builder()
                 .add("client_id", CLIENT_ID)
@@ -49,7 +53,6 @@ public class GitHubAuthManager {
     }
 
     private void startPolling(String deviceCode, int interval, AuthCallback callback) {
-        // Perbaikan 1: Gunakan array final agar bisa di-referensikan di dalam dirinya sendiri
         final Runnable[] pollRunnable = new Runnable[1];
         
         pollRunnable[0] = new Runnable() {
@@ -71,26 +74,68 @@ public class GitHubAuthManager {
                         try {
                             JSONObject json = new JSONObject(response.body().string());
                             if (json.has("access_token")) {
-                                // Perbaikan 2: Ambil string ke variabel dulu sebelum masuk ke lambda
                                 String token = json.getString("access_token");
                                 mainHandler.post(() -> callback.onLoginSuccess(token));
                             } else if (json.optString("error").equals("authorization_pending")) {
-                                // Ulangi polling
                                 mainHandler.postDelayed(pollRunnable[0], interval * 1000L);
                             } else {
                                 String err = json.optString("error");
                                 mainHandler.post(() -> callback.onError("Gagal: " + err));
                             }
-                        } catch (Exception e) { 
-                            // Abaikan error parsing kecil
-                        }
+                        } catch (Exception e) { }
                     }
                 });
             }
         };
         mainHandler.postDelayed(pollRunnable[0], interval * 1000L);
     }
-    
+
+    // ==========================================
+    // METODE 2: LOGIN TANPA KODE (OAuth Redirect)
+    // ==========================================
+    public void exchangeCodeForToken(String clientId, String clientSecret, String code, String redirectUri, AuthCallback callback) {
+        RequestBody body = new FormBody.Builder()
+                .add("client_id", clientId)
+                .add("client_secret", clientSecret) 
+                .add("code", code)
+                .add("redirect_uri", redirectUri)
+                .build();
+
+        Request request = new Request.Builder()
+                .url("https://github.com/login/oauth/access_token")
+                .addHeader("Accept", "application/json")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override 
+            public void onFailure(Call call, IOException e) { 
+                mainHandler.post(() -> callback.onError(e.getMessage())); 
+            }
+            
+            @Override 
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    try {
+                        JSONObject json = new JSONObject(response.body().string());
+                        if (json.has("access_token")) {
+                            String token = json.getString("access_token");
+                            mainHandler.post(() -> callback.onLoginSuccess(token));
+                        } else {
+                            String err = json.optString("error_description");
+                            mainHandler.post(() -> callback.onError("Gagal: " + err));
+                        }
+                    } catch (Exception e) {
+                        mainHandler.post(() -> callback.onError("Parse error"));
+                    }
+                }
+            }
+        });
+    }
+
+    // ==========================================
+    // FUNGSI BANTUAN: AMBIL USERNAME
+    // ==========================================
     public void getUsername(String token, OnUsernameFetched listener) {
         Request request = new Request.Builder()
                 .url("https://api.github.com/user")
@@ -106,5 +151,6 @@ public class GitHubAuthManager {
             }
         });
     }
+    
     public interface OnUsernameFetched { void onFetched(String username); }
-            }
+}
