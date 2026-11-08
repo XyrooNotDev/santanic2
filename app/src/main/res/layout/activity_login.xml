@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="24dp"
+    android:gravity="center" android:background="#121212">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="SANTANIC\nBUILD" android:textColor="#FF0000" android:textSize="32sp"
+        android:textStyle="bold" android:gravity="center"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Build APK Android dengan GitHub Actions"
+        android:textColor="#AAAAAA" android:layout_marginTop="8dp"/>
+
+    <Button android:id="@+id/btnLoginGithub"
+        android:layout_width="match_parent" android:layout_height="60dp"
+        android:text="Login dengan GitHub"
+        android:backgroundTint="#333333" android:textColor="#FFFFFF"
+        android:layout_marginTop="48dp"/>
+
+    <TextView android:id="@+id/tvDeviceCode"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:textColor="#FF0000" android:textSize="18sp" android:textStyle="bold"
+        android:layout_marginTop="24dp" android:gravity="center"/>
+
+    <TextView android:id="@+id/tvStatus"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:textColor="#FFFFFF" android:layout_marginTop="16dp" android:gravity="center"/>
+</LinearLayout>
