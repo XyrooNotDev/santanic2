@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="16dp" android:background="#121212">
+
+    <TextView android:id="@+id/tvTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Build Android Studio" android:textColor="#FFFFFF" android:textSize="20sp" android:textStyle="bold"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" android:hint="Username GitHub" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/etOwner"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#FFFFFF"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" android:hint="Nama Repository" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/etRepo"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#FFFFFF"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" android:hint="Nama File Workflow (contoh: build.yml)" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/etWorkflow"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#FFFFFF"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button android:id="@+id/btnPickFiles"
+        android:layout_width="match_parent" android:layout_height="50dp"
+        android:text="Pilih File (Bisa Banyak)" android:backgroundTint="#333333" android:layout_marginTop="16dp"/>
+
+    <TextView android:id="@+id/tvFileCount" android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="0 file dipilih" android:textColor="#AAAAAA" android:layout_marginTop="8dp"/>
+
+    <Button android:id="@+id/btnStartBuild"
+        android:layout_width="match_parent" android:layout_height="60dp"
+        android:text="Upload &amp; Mulai Build" android:backgroundTint="#FF0000" android:textColor="#FFFFFF"
+        android:layout_marginTop="24dp"/>
+</LinearLayout>
